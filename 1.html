@@ -1,0 +1,18 @@
+<!-- Write a JS code to find the no of digits in a number using for loop.(5 marks)
+Example
+input :- 1122
+output :- total digit no :- 4 -->
+
+<script type="text/javascript">
+    var n = parseInt(prompt("Enter any number: "));
+
+    let no = n.toString();
+
+    let count = 0;
+
+    for(i=1; i<=no.length; i++){
+        count++;
+    }
+    document.write(`Number if digit is: ${count}`);
+
+</script>
