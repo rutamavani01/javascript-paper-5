@@ -1,1 +1,288 @@
 <!-- Write javascript program to create billing app using html , css , javascript -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: grid;
+        place-items: center;
+        background-color: #305454;
+    }
+
+    .glass {
+        height: 100%;
+        width: 100%;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    html {
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .card {
+        /* Add shadows to create the "card" effect */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        height: 320px;
+        width: 250px;
+        margin: 10px;
+        align: center;
+        border-radius: 10px;
+        padding-bottom: 10px;
+        background-color: #FFF;
+        content-align: center;
+    }
+
+    /* On mouse-over, add a deeper shadow */
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    /* Add some padding inside the card container */
+    .container {
+        padding-top: 0px;
+        text-align: center;
+        align-content: center !important;
+    }
+
+    input[type=text] {
+        padding: 8px;
+        border: 1px solid #333;
+        border-radius: 10px;
+        align-content: center;
+    }
+
+    input[type=password] {
+        padding: 8px;
+        border: 1px solid #333;
+        border-radius: 10px;
+        align-content: center;
+    }
+
+    .input_list {
+        font-family: 'Shippori Antique B1', sans-serif;
+        font-size: 12px;
+        width: auto;
+        padding: 15px 20px 15px;
+        margin: 5px;
+        list-style-type: none;
+        align-content: center;
+    }
+
+    .month_select {
+        width: auto;
+        padding-bottom: 15px;
+        padding-right: 5px;
+        padding-left: 5px;
+        margin: 3px;
+        list-style-type: none;
+        text-align: center;
+    }
+    table td{
+        padding: 4px;
+    }
+
+    .submit-btn {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 600;
+        color: #154c79;
+        transition: 0.6s;
+        align: center;
+        margin: auto;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        border: 2px solid #154c79;
+        border-radius: 15px;
+        background-color: #FFF;
+        padding: 5px 60px 5px;
+    }
+
+    .submit-btn:hover {
+        color: #FFF;
+        border: 2px solid #154c79;
+        background-color: #154c79;
+        cursor: pointer;
+    }
+
+    .submit-btn:disabled {
+        color: #FFF;
+        border: 2px solid #363a3d;
+        background-color: #363a3d;
+        cursor: default;
+    }
+
+    .pay-btn {
+        display: none;
+        padding: 5px 30px 5px;
+    }
+
+    h3 {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+    h4 {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 200;
+        font-size: 30px;
+    }
+
+    p {
+        font-family: 'Shippori Antique B1', sans-serif;
+        font-size: 11px;
+    }
+
+    .muted {
+        color: #A6abaf;
+    }
+
+
+    .card-detail {
+        padding: 0px 30px 0px;
+    }
+
+    .card-price {
+        padding: 0px 20px 0px;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+    }
+    #membershipCard{
+        width: 450!important;
+        margin-left: 20px;
+        background-color: white;
+        padding: 20px 50px;
+        border-radius: 10px;
+    }
+</style>
+
+<body>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&family=Source+Sans+Pro:wght@300;400;600&family=Zen+Kurenaido&display=swap"
+            rel="stylesheet">
+    </head>
+
+    <canvas class="orb-canvas"></canvas>
+
+    <div class="glass">
+        <div class="card">
+            <div class="container">
+                <div>
+                    <h3 class="card-text">Billing Details</h3>
+                    <div>
+                        <input class="input_list" type="text" id="name" placeholder="Enter product  Name"></input>
+                        <input class="input_list" type="text" id="price" placeholder="Enter price"></input>
+                    </div>
+                    <button class="submit-btn"  onclick="save()">submit</button>
+                </div>
+                <p id="cardPlaceholder" class="muted">Please confirm membership</p>
+            </div>
+        </div>
+        </br>
+        <div id="membershipCard" class="" >
+            <div class="container">
+                <h3 class="card-text">View Details</h3>
+                <h4 class="card-price">£12.99</h4>
+                <center>
+                    <table border="2">
+                        <tr>
+                            <td>Id</td>
+                            <td>Pro_name</td>
+                            <td>Price</td>
+                            <td>Action</td>
+                        </tr>
+                        <tbody id="record"></tbody>
+                    </table>
+                </center>
+                <button id="confirmButton" class="submit-btn" onclick="removeAll()">Remove all product</button>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+<script type="text/javascript">
+    let data = [];
+
+    const viewData = () => {
+        let record = JSON.parse(localStorage.getItem('user'));
+        let val = (record == null) ? [] : record;
+        let tbl = "";
+        val.map((v)=> {
+            tbl+= 
+            `
+                <tr>
+                    <td>${v.userid}</td>
+                    <td>${v.name}</td>
+                    <td>${v.price}</td>
+                    <td>
+                       <button onclick="deleteData(${v.userid})"> <i class="material-icons">&#xe872;</i></button>
+                    </td>
+            `
+        })
+        document.getElementById('record').innerHTML = tbl;
+    }
+    viewData();
+
+    const save = () => {
+
+     let name = document.getElementById('name').value;
+     let price = document.getElementById('price').value;
+        
+     let obj = {
+        userid : Math.floor(Math.random()*1000),
+        name : name,
+        price : price
+     }
+
+     if(localStorage.getItem('user') === null || localStorage.getItem('user')=== undefined){
+        data.push(obj);
+        localStorage.setItem('user',JSON.stringify(data));
+     }else{
+        let val = JSON.parse(localStorage.getItem('user'));
+        val.push(obj)
+        localStorage.setItem('user',JSON.stringify(val));
+    }
+
+     alert("Data saved successfully");
+
+     document.getElementById('name').value = ""
+     document.getElementById('price').value = ""
+    }
+
+    const deleteData = (id) => {
+        let allData = JSON.parse(localStorage.getItem('user'));
+        let ans = allData.filter((v)=>{
+            return v.userid != id;
+        })
+        localStorage.setItem('user',JSON.stringify(ans));
+        alert("user successfully deleted")
+
+        viewData();
+    }
+
+    const removeAll =() => {
+        localStorage.removeItem('user');
+        alert("are sure! you want to remove??")
+        viewData();
+    }
+</script>
+
+</html>
